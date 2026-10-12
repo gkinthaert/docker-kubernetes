@@ -1,0 +1,101 @@
+apiVersion: v1 # create a persistent volume
+kind: PersistentVolume
+metadata:
+  name: local-volume
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce  # can be used by a single node
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /mnt/disks/local1 # will need to be created on minikube node (see instructions below)
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname # kubectl get node / kubectl describe node minikube
+              operator: In
+              values: ['minikube']
+---
+apiVersion: v1  # create a persistent volume claim
+kind: PersistentVolumeClaim
+metadata:
+  name: local-volume-claim
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-storage
+---
+apiVersion: v1 # create a pod
+kind: Pod
+metadata:
+  name: local-vol-pod
+  labels:
+    name: local-vol-pod
+spec:
+  containers:
+    - name: local-vol
+      image: busybox:1.36.1
+      command:
+        - 'sh'
+        - '-c'
+        - 'sleep 3600'
+      resources:
+        requests:
+          memory: '64Mi'
+          cpu: '250m'
+        limits:
+          memory: '128Mi'
+          cpu: '500m'
+      volumeMounts:
+        - name: local-volume
+          mountPath: /mnt/local
+  volumes:
+    - name: local-volume
+      persistentVolumeClaim:
+        claimName: local-volume-claim
+---
+apiVersion: v1 # create another pod
+kind: Pod
+metadata:
+  name: local-vol-pod2
+  labels:
+    name: local-vol-pod2
+spec:
+  containers:
+    - name: local-vol
+      image: busybox:1.36.1
+      command:
+        - 'sh'
+        - '-c'
+        - 'sleep 3600'
+      resources:
+        requests:
+          memory: '64Mi'
+          cpu: '250m'
+        limits:
+          memory: '128Mi'
+          cpu: '500m'
+      volumeMounts:
+        - name: local-volume
+          mountPath: /mnt/local2
+  volumes:
+    - name: local-volume
+      persistentVolumeClaim:
+        claimName: local-volume-claim
+
+# creating local1 directory on node:
+# kubectl get node will get list of nodes - in my case minikube
+# minikube ssh
+# once on minikube:
+# sudo mkdir -p /mnt/disks/local1
+# sudo chmod 777 /mnt/disks/local1
+# cd /mnt/disks/local1
+  

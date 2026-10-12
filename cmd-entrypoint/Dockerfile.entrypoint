@@ -1,0 +1,10 @@
+FROM alpine:3.20
+
+ENTRYPOINT ["echo", "Hello from Entrypoint in Dockerfile.entrypoint" ]
+
+# gkinthaert@GeertBiz:~/docker-k8s/cmd-entrypoint$ docker run --rm entrypoint-example
+## Hello from Entrypoint in Dockerfile.entrypoint
+# gkinthaert@GeertBiz:~/docker-k8s/cmd-entrypoint$ docker run --rm entrypoint-example " and what else can we do"
+## Hello from Entrypoint in Dockerfile.entrypoint and what else can we do
+# gkinthaert@GeertBiz:~/docker-k8s/cmd-entrypoint$ docker run --rm --entrypoint "echo" entrypoint-example "and what else can we do"
+## and what else can we do

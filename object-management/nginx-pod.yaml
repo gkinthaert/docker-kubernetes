@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  labels:
+    app: nginx
+  annotations:
+    description: "Nginx pod for learning purposes"
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx:1.27.0
+      ports:
+        - containerPort: 80
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "128Mi"
+        limits:
+          cpu: "250m"
+          memory: "256Mi"
+
+# command: kubectl create -f nginx-pod.yaml
+# kubectl get pods
+# kubectl describe pod nginx-pod
+
+# IMPERATIVE COMMANDS!!
+# kubectl apply -f nginx-pod.yaml
+# kubectl delete -f nginx-pod.yaml
+# if you have multiple files in a directory do them in one step
+# kubectl apply -f [name of folder]
+# or (if you are in the director) kubectl apply -f .
+# works also with delete
+# kubectl delete -f . or kubectl delete -f [nme of folder]
+      
+# other important command
+# kubectl diff -f [name of folder]

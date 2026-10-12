@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mealie
+  name: mealie
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mealie
+  template:
+    metadata:
+      labels:
+        app: mealie
+    spec:
+      containers:
+      - image: ghcr.io/mealie-recipes/mealie:v3.28.0
+        name: mealie
+        ports:
+          - containerPort: 9000
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+
+
+# apply this file then
+# kubectl get pods to get the name of the pod
+# ubectl port-forward pod/mealie-5bc87bb9c9-vlkcl 9000:9000  and now check localhost:9000
+
+            

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geert Kinthaert – Cloud Engineer</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Calibri, Arial, sans-serif;
+      font-size: 14px;
+      color: #333333;
+      background: #f0f2f5;
+      line-height: 1.55;
+    }
+
+    /* Page wrapper */
+    .page {
+      max-width: 860px;
+      margin: 36px auto;
+      background: #ffffff;
+      padding: 52px 60px 60px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.12);
+    }
+
+    /* ── HEADER ── */
+    .header {
+      margin-bottom: 24px;
+    }
+
+    .header h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #1A5276;
+      letter-spacing: 0.3px;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+
+    .header .title {
+      font-size: 15px;
+      color: #555555;
+      margin-bottom: 10px;
+    }
+
+    .contact-line {
+      font-size: 12.5px;
+      color: #999999;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 0;
+      align-items: center;
+    }
+
+    .contact-line span {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .contact-line .sep {
+      margin: 0 8px;
+      color: #cccccc;
+    }
+
+    .contact-line a {
+      color: #1A5276;
+      text-decoration: none;
+    }
+
+    .contact-line a:hover { text-decoration: underline; }
+
+    /* ── SECTION ── */
+    .section {
+      margin-bottom: 22px;
+    }
+
+    .section-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #1A5276;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding-bottom: 5px;
+      border-bottom: 1.5px solid #1A5276;
+      margin-bottom: 12px;
+    }
+
+    /* ── SUMMARY ── */
+    .summary p {
+      font-size: 13.5px;
+      color: #333333;
+      line-height: 1.6;
+    }
+
+    /* ── COMPETENCIES ── */
+    .competencies-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px 12px;
+    }
+
+    .competency-item {
+      font-size: 13px;
+      color: #333333;
+      padding: 3px 0 3px 14px;
+      position: relative;
+      line-height: 1.4;
+    }
+
+    .competency-item::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: #1A5276;
+      font-weight: 700;
+    }
+
+    /* ── EXPERIENCE ── */
+    .job {
+      margin-bottom: 18px;
+    }
+
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 6px;
+    }
+
+    .job-title-company {
+      font-size: 13.5px;
+      color: #333333;
+    }
+
+    .job-title-company strong {
+      font-weight: 700;
+      color: #333333;
+    }
+
+    .job-title-company .company {
+      color: #555555;
+    }
+
+    .job-dates {
+      font-size: 12.5px;
+      color: #999999;
+      white-space: nowrap;
+    }
+
+    .job ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .job ul li {
+      font-size: 13px;
+      color: #333333;
+      line-height: 1.6;
+      padding: 2px 0 2px 16px;
+      position: relative;
+    }
+
+    .job ul li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: #555555;
+    }
+
+    /* ── PROJECTS ── */
+    .project {
+      margin-bottom: 14px;
+    }
+
+    .project-header {
+      font-size: 13.5px;
+      margin-bottom: 4px;
+      color: #333333;
+    }
+
+    .project-header strong {
+      font-weight: 700;
+      color: #333333;
+    }
+
+    .project-header .tech {
+      font-style: italic;
+      color: #555555;
+      font-size: 12.5px;
+    }
+
+    .project ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .project ul li {
+      font-size: 13px;
+      color: #333333;
+      line-height: 1.6;
+      padding: 2px 0 2px 16px;
+      position: relative;
+    }
+
+    .project ul li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: #555555;
+    }
+
+    /* ── EDUCATION ── */
+    .edu-list, .cert-list, .additional-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .edu-list li, .cert-list li, .additional-list li {
+      font-size: 13px;
+      color: #333333;
+      padding: 3px 0 3px 16px;
+      position: relative;
+      line-height: 1.55;
+    }
+
+    .edu-list li::before,
+    .cert-list li::before,
+    .additional-list li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: #555555;
+    }
+
+    /* ── PRINT ── */
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        padding: 20mm 18mm;
+        box-shadow: none;
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .page { padding: 28px 20px; margin: 0; box-shadow: none; }
+      .competencies-grid { grid-template-columns: repeat(2, 1fr); }
+      .job-header { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="header">
+    <h1>Geert Kinthaert</h1>
+    <div class="title">Cloud Engineer</div>
+    <div class="contact-line">
+      <span>617 319 5294</span>
+      <span class="sep">|</span>
+      <span><a href="mailto:gkinthaert@gmail.com">gkinthaert@gmail.com</a></span>
+      <span class="sep">|</span>
+      <span><a href="https://www.linkedin.com/in/gkinthaert/" target="_blank" rel="noopener">LinkedIn</a></span>
+      <span class="sep">|</span>
+      <span><a href="https://github.com/gkinthaert" target="_blank" rel="noopener">GitHub</a></span>
+    </div>
+  </header>
+
+  <!-- PROFESSIONAL SUMMARY -->
+  <section class="section summary">
+    <div class="section-title">Professional Summary</div>
+    <p>AWS Cloud Engineer with DevOps and Infrastructure as Code experience across production, multi-account AWS environments. Skilled in Terraform, AWS CDK (TypeScript), and CloudFormation, with a focus on CI/CD automation, least-privilege IAM, scalable VPC design, monitoring/alerting, and incident response. Known for standardizing deployments, reducing downtime, and improving reliability through automation and operational excellence.</p>
+  </section>
+
+  <!-- CORE COMPETENCIES -->
+  <section class="section">
+    <div class="section-title">Core Competencies</div>
+    <div class="competencies-grid">
+      <div class="competency-item">AWS</div>
+      <div class="competency-item">DevOps</div>
+      <div class="competency-item">CI/CD</div>
+      <div class="competency-item">Problem Solving</div>
+      <div class="competency-item">Terraform</div>
+      <div class="competency-item">Serverless</div>
+      <div class="competency-item">Cloud Engineering</div>
+      <div class="competency-item">CloudFormation</div>
+      <div class="competency-item">Team Collaboration</div>
+    </div>
+  </section>
+
+  <!-- PROFESSIONAL EXPERIENCE -->
+  <section class="section">
+    <div class="section-title">Professional Experience</div>
+
+    <div class="job">
+      <div class="job-header">
+        <div class="job-title-company">
+          <strong>Manager, Applications Support</strong>
+          <span class="company"> | Rapid7, LLC</span>
+        </div>
+        <div class="job-dates">July 2020 – September 2025</div>
+      </div>
+      <ul>
+        <li>Managed the L1 and L2 support and admin team supporting ERP, CRM and other enterprise applications. Liaison with CSMs, Customer Technical Support and NetSuite developers, coordinating end-to-end product licensing fulfillment.</li>
+        <li>Coordinated activities on Salesforce enhancements to quote-to-cash and data quality, using agile methodologies and CI/CD tools.</li>
+        <li>ITSM Delivery Manager and Service Owner, growing adoption company wide.</li>
+        <li>Work with internal and external audit on compliance and governance projects and deliverables.</li>
+        <li>Improve response times and customer experience, track and report metrics and KPIs.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-header">
+        <div class="job-title-company">
+          <strong>Sr. Software Engineer</strong>
+          <span class="company"> | Rapid7, LLC</span>
+        </div>
+        <div class="job-dates">February 2019 – July 2020</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY PROJECTS -->
+  <section class="section">
+    <div class="section-title">Key Projects</div>
+
+    <div class="project">
+      <div class="project-header">
+        <strong>AWS Hosted Website</strong>
+        <span class="tech"> — AWS Console, AWS CLI</span>
+      </div>
+      <ul>
+        <li>Built a marketing website using S3, CloudFront, and CloudWatch.</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <strong>AWS Migration to Infrastructure as Code</strong>
+        <span class="tech"> — AWS CDK, TypeScript, AWS CLI</span>
+      </div>
+      <ul>
+        <li>Converted a manually-managed AWS environment to a fully automated CDK stack, reducing provisioning from hours to minutes and cutting disaster recovery RTO from 4–6 hours to under 15 minutes.</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <strong>Multi-Account CI/CD Pipeline</strong>
+        <span class="tech"> — GitHub Actions, AWS CDK, TypeScript</span>
+      </div>
+      <ul>
+        <li>Built end-to-end GitHub Actions pipeline for automated infrastructure testing and deployment across multi-account AWS environments, eliminating manual release processes.</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <strong>IAM Identity Center Automation</strong>
+        <span class="tech"> — Terraform, AWS IAM, GitHub</span>
+      </div>
+      <ul>
+        <li>Automated user and permission provisioning across multi-account AWS environments using Terraform, replacing manual access management and enforcing security compliance at scale.</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <strong>Scalable VPC Architecture</strong>
+        <span class="tech"> — AWS VPC, ALB, Auto Scaling, CloudWatch</span>
+      </div>
+      <ul>
+        <li>Designed production VPC with load balancing, auto-scaling groups, and centralized logging, improving availability and halving mean time to recovery (MTTR).</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <strong>Serverless Automation</strong>
+        <span class="tech"> — Python, AWS Lambda, Docker</span>
+      </div>
+      <ul>
+        <li>Built automated infrastructure workflows using Lambda and deployed Docker applications, reducing operational costs by 30%.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="section">
+    <div class="section-title">Education</div>
+    <ul class="edu-list">
+      <li><strong>Unique Systems Skills</strong> — Certificate, 2026 &nbsp;·&nbsp; Covering AWS infrastructure, DevOps, AWS AI capabilities</li>
+      <li><strong>Cloud Engineer Academy</strong> — Cloud &amp; AI Engineering Certificate, 2026 &nbsp;·&nbsp; Intensive hands-on program covering AWS infrastructure, IaC (CDK, Terraform, CloudFormation), CI/CD, DevOps, security, and AI</li>
+      <li><strong>Suffolk University</strong> — MBA / MSA</li>
+      <li><strong>Brandeis University</strong> — MS, Software Engineering</li>
+    </ul>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section class="section">
+    <div class="section-title">Certifications</div>
+    <ul class="cert-list">
+      <li>AWS CLF-C01, SAA-C01, DVA-C01, SOA-C01</li>
+      <li>CISA, CISM</li>
+      <li>Salesforce, NetSuite certifications</li>
+    </ul>
+  </section>
+
+  <!-- ADDITIONAL -->
+  <section class="section">
+    <div class="section-title">Additional</div>
+    <ul class="additional-list">
+      <li><strong>Interests:</strong> Traveling, Reading, Gardening</li>
+      <li><strong>Languages:</strong> English, Dutch, French, German</li>
+      <li><strong>Currently studying:</strong> AWS SAA-C03 and AWS CLF-C02</li>
+    </ul>
+  </section>
+
+</div>
+</body>
+</html>

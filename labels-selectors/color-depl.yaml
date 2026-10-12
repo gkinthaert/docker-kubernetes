@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: color-api-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: color-api
+      environment: local
+      tier: backend
+    matchExpressions:
+      - key: managed
+        operator: Exists
+      - key: tier
+        operator: In
+        values: [backend, cache]
+  template:
+    metadata:
+      labels:
+        app: color-api
+        environment: local
+        tier: backend
+        managed: 'deployment'
+    spec:
+      containers:
+      - name: color-api
+        image: gkinthaert/color-api:1.1.0
+        ports:
+        - containerPort: 80
+
+
+# kubectl apply -f .
+# kubectl get pods
+# kubectl get pods -L app -L tier -L environment -L managed

@@ -1,0 +1,9 @@
+node_modules
+
+# we want to use environment variables
+# instead of adding these in the run command
+# BUT we do not want to put those in the container
+
+**/.env*
+# .env.prod
+# .env.dev

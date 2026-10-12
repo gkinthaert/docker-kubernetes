@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-external-svc
+spec:
+  type: ExternalName
+  externalName: google.com
+
+# kubectl apply -f google-extname.yaml
+# kubectl get services will now show the ExternalName svc
+# start another pod and exec sh into it
+# curl my-external-svc

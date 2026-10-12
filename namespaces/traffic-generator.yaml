@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: traffic-generator
+  # namespace: let's not set it so it will be default namespace
+  labels:
+    app: traffic-generator
+spec:
+  containers:
+    - name: traffic-generator
+      image: gkinthaert/traffic-generator:1.0.0
+      args:
+        - 'color-api-svc.dev.svc.cluster.local/api'
+        - '1'
+
+
+# kubectl apply -f .
+# kubectl get pod
+# kubectl get pod,svc -n dev (to show both servie and pods running in dev namespace)

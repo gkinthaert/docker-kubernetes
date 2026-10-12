@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: prod
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  namespace: prod
+  name: prod-quota
+spec:
+  hard:
+    requests.cpu: '2' # 2000m
+    requests.memory: '2Gi'
+    limits.cpu: '4'
+    limits.memory: '4Gi'
+
+
+# kubectl apply -f .
+# kubectl get ns
+# kubectl get resourcequota -A ## all namespaces!
+# kubectl describe resourcequote dev-quota -n dev

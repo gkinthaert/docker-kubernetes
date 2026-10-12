@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: traffic-generator
+  labels:
+    app: traffic-generator
+spec:
+  containers:
+    - name: traffic-generator
+      image: gkinthaert/traffic-generator:1.0.0
+      args:
+        - 'color-api-clusterip/api' # even better to use the name as IP will change if svc is deleted and re-applied!
+        # - '10.103.191.173/api' # clusterIP
+        - '0.5'
+
+
+# kubectl apply -f all these files
+# run kubectl logs traffic-generator
+# you will see that the clusterip
+# acts like a load balancer hitting all the pods
