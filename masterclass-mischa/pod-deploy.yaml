@@ -18,7 +18,27 @@ spec:
       limits:
         cpu: 500m
         memory: 256Mi
+  - name: busybox
+    image: busybox
+    command: ["/bin/sh", "-c"]
+    args: ["sleep 1000"]
+    volumeMounts:
+      - mountPath: /scratch
+        name: scratch-volume
+    resources:
+      requests:
+        cpu: 50m
+        memory: 64Mi
+      limits:
+        cpu: 250m
+        memory: 128Mi
   volumes:
     - name: scratch-volume
       emptyDir:
         sizeLimit: 500Mi
+
+# one pod two containers
+# kubectl describe pod nginx-storage describes the pod
+# how to access the individual containers????
+# kubectl exec -it nginx-storage -c nginx -- bash
+# kubectl exec -it nginx-storage -c busybox -- sh

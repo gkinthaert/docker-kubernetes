@@ -27,6 +27,14 @@ spec:
           limits:
             cpu: "500m"
             memory: "512Mi"
+        volumeMounts:
+          - mountPath: /app/data
+            name: mealie-data
+      volumes:
+        - name: mealie-data
+          persistentVolumeClaim: 
+            claimName: mealie-data
+
 
 
 # apply this file then
